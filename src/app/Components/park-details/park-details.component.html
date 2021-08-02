@@ -1,0 +1,166 @@
+<div class="container">
+  <h1>{{ park.name }}</h1>
+  <div style="display: flex; flex-direction: row">
+    <div
+      id="description"
+      style="
+        width: 50%;
+        margin-top: 60px;
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+      "
+    >
+      {{ parkData.description }}
+      <div
+        style="
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <button type="button" class="btn btn-outline-secondary" (click)="getWeather();">
+          nws radar
+        </button>
+      </div>
+    </div>
+    <app-np-alerts [park]="park" style="width: 50%"></app-np-alerts>
+  </div>
+  <div style="margin-bottom: 30px">
+    <h2>Activities</h2>
+    <mat-chip-list>
+      <mat-chip *ngFor="let activity of parkData.activities">
+        {{ activity.name }}
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
+  <div
+    id="entrance-fees"
+    *ngIf="parkData.entranceFees[0].cost != '0.00'"
+    style="align-self: center"
+  >
+    <h2>Entrance Fees</h2>
+    <p-carousel
+      [value]="parkData.entranceFees"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template let-fee pTemplate="item">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Cinzel;
+          "
+        >
+          <div style="margin-right: 5px; margin-left: 5px">
+            <p>{{ fee.title }}: ${{ fee.cost }}</p>
+            <hr />
+            <p>{{ fee.description }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div *ngIf="eventData.length != 0">
+    <h2>Events</h2>
+    <div
+      id="upcoming-events"
+      class="carousel carousel-dark slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          class="carousel-item"
+          data-bs-interval="10000"
+          *ngFor="let event of eventData; let i = index"
+          [ngClass]="{ active: i == 0 }"
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 100%;
+            "
+          >
+            <div style="width: 80%">
+              <h3>{{ event.title }}</h3>
+              <div id="description" [innerHtml]="event.description"></div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <p>Dates:</p>
+                <p *ngFor="let date of event.dates">| {{ date }} |</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#upcoming-events"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#upcoming-events"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="carouselExampleInterval"
+    class="carousel carousel-dark slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div
+        class="carousel-item"
+        *ngFor="let image of parkData.images; let i = index"
+        [ngClass]="{ active: i == 0 }"
+      >
+        <img [src]="image.url" class="d-block w-100" />
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleInterval"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleInterval"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

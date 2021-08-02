@@ -1,0 +1,47 @@
+<div class="container">
+    <h1>Trail Search</h1>
+    <app-search [searchParks]='false' [searchTrails]='true' [redirectToResults]='false'(searchEvent)="handleSearchEvent($event)"></app-search>
+</div>
+
+<table class="table text-center" [hidden]="hideResults">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Area</th>
+            <th scope="col">City</th>
+            <th scope="col">Route Type</th>
+            <th scope="col">Length</th>
+            <th scope="col">Average Rating</th>
+            <th scope="col">Reviews</th>
+            <th scope="col">Difficulty Rating</th>
+            <th scope="col">Elevation Change</th>
+            <th scope="col">Visitor Usage</th>
+            <th scope="col">Units</th>
+            <th scope="col">Features</th>
+            <th scope="col">Activities</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data">
+            <td>{{ item.trailID }}</td>
+            <td><a href="{{ generateAllTrailsLink(item)}}" target="_blank">{{item.name}}</a></td>
+            <td>{{ item.area }}</td>
+            <td>{{ item.city }}</td>
+            <td>{{ item.routeType }}</td>
+            <td>{{ item.length }}</td>
+            <td>{{ item.avgRating }}</td>
+            <td>{{ item.numReviews }}</td>
+            <td>{{ item.difficultyRating }}</td>
+            <td>{{ item.elevationChange }}</td>
+            <td>{{ item.visitorUsage }}</td>
+            <td>{{ item.units }}</td>
+            <td>
+                <p *ngFor="let feature of item.features">{{feature.feature}}</p>
+            </td>
+            <td>
+                <p *ngFor="let act of item.activities">{{act.activity}}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+<h2>Alerts</h2>
+<div class="alert-container" *ngIf="alerts != undefined">
+    <mat-card *ngFor="let alert of alerts.data" style="margin-bottom: 10px;">
+        <div style="display:flex; flex-direction: row;">
+        <i class="bi {{ getAlertIcon(alert) }} {{ getAlertColor(alert) }}"></i>
+        <mat-card-header style="font-family: Cinzel;">
+            <mat-card-title>
+                {{ alert.title }}
+            </mat-card-title>
+        </mat-card-header>
+        </div>
+            <mat-card-content style='font-family: Cinzel;'>
+                {{ alert.description }}
+            </mat-card-content>
+    </mat-card>
+</div>

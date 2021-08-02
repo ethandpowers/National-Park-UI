@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Results</h1>
+</div>
+<table class="table text-center table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Acres</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">States</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data" (click)="getParkPage(item)">
+            <td>{{ item.code }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.acres }}</td>
+            <td>{{ item.latitude}}</td>
+            <td>{{ item.longitude }}</td>
+            <td><p *ngFor="let state of item.states">{{ state.name }}</p></td>
+        </tr>
+    </tbody>
+</table>

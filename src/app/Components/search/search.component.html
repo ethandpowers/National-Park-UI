@@ -1,0 +1,45 @@
+<form
+  autocomplete="off"
+  (ngSubmit)="checkForm()"
+  style="display: flex; flex-direction: row; align-items: center"
+>
+  <mat-form-field>
+    <mat-label style="font-family: Cinzel">Search By</mat-label>
+    <mat-select
+      name="dropDown"
+      style="font-family: Cinzel"
+      [(ngModel)]="searchParam"
+    >
+      <mat-optgroup *ngFor="let option of searchOptions">
+        <p style="font-family: Cinzel">
+          {{ option.name }}
+        </p>
+        <mat-option
+          *ngFor="let param of option.params"
+          [value]="param"
+          style="font-family: Cinzel"
+          >{{ param }}</mat-option
+        >
+      </mat-optgroup>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="margin-left: 20px">
+    <mat-label style="font-family: Cinzel">Search Value</mat-label>
+    <input
+      matInput
+      style="font-family: Cinzel"
+      #myInput
+      (input)="onKeystroke(myInput.value)"
+    />
+  </mat-form-field>
+  <div style="max-width: 50px; width:40px; display: flex; flex-direction: row-reverse; align-items: center; justify-content: center;">
+    <button mat-icon-button type="submit" [hidden]="hiddenButton">
+      <i class="bi bi-search" ></i>
+    </button>
+    <mat-spinner
+      [hidden]="!hiddenButton"
+      strokeWidth="2"
+      diameter="20"
+    ></mat-spinner>
+  </div>
+</form>

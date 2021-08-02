@@ -1,0 +1,46 @@
+<div class="container">
+    <h1>Complex Search</h1>
+    <h2>Primary Search</h2>
+    <app-search [searchParks]='false' [redirectToResults]='false'(searchEvent)="handleSearchEvent($event)"></app-search>
+    <p><br></p>
+    <h2>Filter</h2>
+    <app-search (searchEvent)="handleFilterEvent($event)" [redirectToResults]='false'></app-search>
+</div>
+
+<table class="table text-center" [hidden]="hideResults">
+    <thead>
+        <tr>
+            <th scope="col">Common Names</th>
+            <th scope="col">Scientific Name</th>
+            <th scope="col">SpeciesID</th>
+            <th scope="col">Park</th>
+            <th scope="col">Abundance</th>
+            <th scope="col">Category</th>
+            <th scope="col">Order</th>
+            <th scope="col">Family</th>
+            <th scope="col">Conservation Status</th>
+            <th scope="col">Nativeness</th>
+            <th scope="col">Occurrence</th>
+            <th scope="col">Seasonality</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of finalData">
+            <td>
+                <p *ngFor="let cName of item.commonNames"><a href="{{ generateWikiLink(cName.name)}}"
+                        target="_blank">{{cName.name}}</a></p>
+            </td>
+            <td>{{ item.scientificName }}</td>
+            <td>{{ item.speciesID }}</td>
+            <td><a href="{{ generateWikiLink(item.park)}}" target="_blank">{{item.park}}</a></td>
+            <td>{{ item.abundance }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.order }}</td>
+            <td>{{ item.family }}</td>
+            <td>{{ item.conservationStatus }}</td>
+            <td>{{ item.nativeness }}</td>
+            <td>{{ item.occurance }}</td>
+            <td>{{ item.seasonality }}</td>
+        </tr>
+    </tbody>
+</table>

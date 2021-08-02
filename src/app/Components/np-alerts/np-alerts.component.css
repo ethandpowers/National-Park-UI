@@ -1,0 +1,24 @@
+.information {
+  color: green;
+}
+
+.caution {
+  color: orange;
+}
+
+.danger {
+  color: orangered;
+}
+
+.park-closure {
+  color: cadetblue;
+}
+
+.alert-container {
+  border: cadetblue;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  max-height: 300px;
+  overflow-y:auto;
+}
